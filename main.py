@@ -38,35 +38,28 @@ int_changes = [int_profits_losses[i+1] - int_profits_losses[i] for i in range(le
 #Shows the output_pybank in the format we're looking for
 #Extra print("") functions to output_pybank extra spaces. Keeps the data clean, spaced out, and easy to read
 print("")
-print("Financial Analysis")
-print("")
-print("---------------------------")
-print("")
+print("Financial Analysis\n")
+print("---------------------------\n")
 
 
 #Prints the Values and their associated Results in the terminal
 
 #Total Months is the length of our months list
-print(f'Total Months: {len(months)}')
-print("")
+print(f'Total Months: {len(months)}\n')
 
 #Total is the sum of all our Profits and Losses
-print(f'Total: ${sum(int_profits_losses)}')
-print("")
+print(f'Total: ${sum(int_profits_losses)}\n')
 
 #Average Change is the sum of all the changes from our profits and losses divided by the amount of changes there are. Rounded to 2 decimal places
-print(f'Average Change: ${round((sum(int_changes)) / (len(int_changes)), 2)}')
-print("")
+print(f'Average Change: ${round((sum(int_changes)) / (len(int_changes)), 2)}\n')
 
 #Greatest Increase in Profits found to be the maximum value in our changes list
 #We then find the index of said value in our changes list and match that with the corresponding month in our months list
-print(f'Greatest Increase in Profits: {months[int_changes.index(max(int_changes)) + 1]} (${max(int_changes)})')
-print("")
+print(f'Greatest Increase in Profits: {months[int_changes.index(max(int_changes)) + 1]} (${max(int_changes)})\n')
 
 #Greatest Increase in Profits found to be the minimum value in our changes list
 #Same process with finding the corresponding month for the minimum value
-print(f'Greatest Decrease in Profits: {months[int_changes.index(min(int_changes)) + 1]} (${min(int_changes)})')
-print("")
+print(f'Greatest Decrease in Profits: {months[int_changes.index(min(int_changes)) + 1]} (${min(int_changes)})\n')
 
 
 #Creating the lists we're going to zip together to display in the outputed text file
@@ -134,27 +127,18 @@ for i in candidate:
 
     ballot_count[candidate_index] += 1
 
+
 print('')
-print('Election Results')
-print('')
-print('---------------------------')
-print('')
-print(f'Total Votes: {len(voter_id)}')
-print('')
-print('---------------------------')
-print('')
-print(f'{candidate_list[0]}: {round(((ballot_count[0] / (len(voter_id)))*100), 3)}% ({ballot_count[0]})')
-print('')
-print(f'{candidate_list[1]}: {round(((ballot_count[1] / (len(voter_id)))*100), 3)}% ({ballot_count[1]})')
-print('')
-print(f'{candidate_list[2]}: {round(((ballot_count[2] / (len(voter_id)))*100), 3)}% ({ballot_count[2]})')
-print('')
-print('---------------------------')
-print('')
-print(f'Winner: {candidate_list[ballot_count.index(max(ballot_count))]}')
-print('')
-print('---------------------------')
-print('')
+print('Election Results\n')
+print('---------------------------\n')
+print(f'Total Votes: {len(voter_id)}\n')
+print('---------------------------\n')
+print(f'{candidate_list[0]}: {round(((ballot_count[0] / (len(voter_id)))*100), 3)}% ({ballot_count[0]})\n') 
+print(f'{candidate_list[1]}: {round(((ballot_count[1] / (len(voter_id)))*100), 3)}% ({ballot_count[1]})\n')
+print(f'{candidate_list[2]}: {round(((ballot_count[2] / (len(voter_id)))*100), 3)}% ({ballot_count[2]})\n')
+print('---------------------------\n')
+print(f'Winner: {candidate_list[ballot_count.index(max(ballot_count))]}\n')
+print('---------------------------\n')
 
 values_pypoll = ['Total Results', 
                  (f'Percentage of votes for {candidate_list[0]}'),
