@@ -29,11 +29,14 @@ with open(budget_data_csv, 'r') as csvfile_pybank:
 #Converts the data in the profits and losses list to integers
 int_profits_losses = [int(i) for i in profits_losses]
 
-#Creates a list of the difference between values for the profits and losses
+
+#This comprehensive list was added with the aid of StackOverflow: https://stackoverflow.com/questions/2400840/python-finding-differences-between-elements-of-a-list
+#Creates a list of the difference between values_pybank
+# for the profits and losses
 int_changes = [int_profits_losses[i+1] - int_profits_losses[i] for i in range(len(int_profits_losses) - 1)]
 
-#Shows the output in the format we're looking for
-#Extra print("") functions to output extra spaces. Keeps the data clean, spaced out, and easy to read!
+#Shows the output_pybank in the format we're looking for
+#Extra print("") functions to output_pybank extra spaces. Keeps the data clean, spaced out, and easy to read
 print("")
 print("Financial Analysis\n")
 print("---------------------------\n")
@@ -83,3 +86,83 @@ with open(output_text_pybank, 'w') as pybank_output:
 
     #Adding the zipped list into rows within the output_pybank file
     writer.writerows(output_pybank)
+
+
+
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+#                     PART 2 - PYPOLL
+#-------------------------------------------------------------
+#-------------------------------------------------------------
+
+election_data_csv = os.path.join('PyPoll', 'Resources', "election_data.csv")
+
+voter_id = []
+county = []
+candidate = []
+
+with open(election_data_csv, 'r') as csvfile_pypoll:
+       
+        csvreader_pypoll = csv.reader(csvfile_pypoll)
+
+        #Stores the header row
+        header = next(csvreader_pypoll)
+
+        for row in csvreader_pypoll:
+              
+              voter_id.append(row[0])
+              county.append(row[1])
+              candidate.append(row[2])
+
+ballot_count = [0, 0, 0]
+candidate_list = []
+
+for i in candidate:
+
+    if i not in candidate_list:
+          
+        candidate_list.append(i)
+
+    candidate_index = candidate_list.index(i)
+
+    ballot_count[candidate_index] += 1
+
+
+print('')
+print('Election Results\n')
+print('---------------------------\n')
+print(f'Total Votes: {len(voter_id)}\n')
+print('---------------------------\n')
+print(f'{candidate_list[0]}: {round(((ballot_count[0] / (len(voter_id)))*100), 3)}% ({ballot_count[0]})\n') 
+print(f'{candidate_list[1]}: {round(((ballot_count[1] / (len(voter_id)))*100), 3)}% ({ballot_count[1]})\n')
+print(f'{candidate_list[2]}: {round(((ballot_count[2] / (len(voter_id)))*100), 3)}% ({ballot_count[2]})\n')
+print('---------------------------\n')
+print(f'Winner: {candidate_list[ballot_count.index(max(ballot_count))]}\n')
+print('---------------------------\n')
+
+values_pypoll = ['Total Results', 
+                 (f'Percentage of votes for {candidate_list[0]}'),
+                 (f'Percentage of votes for {candidate_list[1]}'), 
+                 (f'Percentage of votes for {candidate_list[2]}'), 
+                 'Winner']
+
+results_pypoll = [(f'{len(voter_id)}'),
+                  (f'{round(((ballot_count[0] / (len(voter_id)))*100), 3)}% ({ballot_count[0]})'),
+                  (f'{round(((ballot_count[1] / (len(voter_id)))*100), 3)}% ({ballot_count[1]})'),
+                  (f'{round(((ballot_count[2] / (len(voter_id)))*100), 3)}% ({ballot_count[2]})'),
+                  (f'{candidate_list[ballot_count.index(max(ballot_count))]}')]
+
+output_pypoll = list(zip(values_pypoll, results_pypoll))
+
+output_text_pypoll = os.path.join('PyPoll', 'Resources', 'output_pypoll.csv')
+
+#Opening our output_pybank text file
+with open(output_text_pypoll, 'w') as pypoll_output:
+      
+    writer = csv.writer(pypoll_output)
+
+    #Creating the header row
+    writer.writerow(['Values', 'Results'])
+
+    #Adding the zipped list into rows within the output_pybank file
+    writer.writerows(output_pypoll)
